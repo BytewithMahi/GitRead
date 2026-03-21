@@ -35,7 +35,7 @@ export const ReviewDashboard = ({ content, analysis, onBack }: ReviewDashboardPr
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:5000/api/improve', {
+      const response = await fetch('https://gitread-backend.onrender.com/api/improve', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ readme: content })
@@ -139,7 +139,7 @@ export const ReviewDashboard = ({ content, analysis, onBack }: ReviewDashboardPr
 
       {/* Main Split View */}
       <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 h-[calc(100vh-180px)] overflow-hidden">
-        
+
         {/* Left Side Panel */}
         <motion.div
           className="glass-panel rounded-2xl flex flex-col h-full relative"
@@ -171,9 +171,9 @@ export const ReviewDashboard = ({ content, analysis, onBack }: ReviewDashboardPr
             </motion.div>
           ) : (
             <>
-              <FloatingCard 
-                title="Overview & Score" 
-                variant="purple" 
+              <FloatingCard
+                title="Overview & Score"
+                variant="purple"
                 icon={<BarChart2 size={16} className="text-gravity-purple" />}
               >
                 <div className="flex items-center space-x-6">
@@ -187,9 +187,9 @@ export const ReviewDashboard = ({ content, analysis, onBack }: ReviewDashboardPr
                 </div>
               </FloatingCard>
 
-              <FloatingCard 
-                title="Strengths" 
-                variant="green" 
+              <FloatingCard
+                title="Strengths"
+                variant="green"
                 icon={<CheckCircle size={16} className="text-green-500" />}
               >
                 <ul className="list-disc list-inside space-y-1 text-gray-400 text-xs">
@@ -199,9 +199,9 @@ export const ReviewDashboard = ({ content, analysis, onBack }: ReviewDashboardPr
                 </ul>
               </FloatingCard>
 
-              <FloatingCard 
-                title="Weaknesses" 
-                variant="red" 
+              <FloatingCard
+                title="Weaknesses"
+                variant="red"
                 icon={<AlertTriangle size={16} className="text-red-500" />}
               >
                 <ul className="list-disc list-inside space-y-1 text-gray-400 text-xs">
@@ -211,9 +211,9 @@ export const ReviewDashboard = ({ content, analysis, onBack }: ReviewDashboardPr
                 </ul>
               </FloatingCard>
 
-              <FloatingCard 
-                title="Actionable Suggestions" 
-                variant="cyan" 
+              <FloatingCard
+                title="Actionable Suggestions"
+                variant="cyan"
                 icon={<Lightbulb size={16} className="text-gravity-cyan" />}
               >
                 <ol className="list-decimal list-inside space-y-1 text-gray-400 text-xs">
@@ -223,9 +223,9 @@ export const ReviewDashboard = ({ content, analysis, onBack }: ReviewDashboardPr
                 </ol>
               </FloatingCard>
 
-              <FloatingCard 
-                title="Missing Standard Sections" 
-                variant="yellow" 
+              <FloatingCard
+                title="Missing Standard Sections"
+                variant="yellow"
                 icon={<FileWarning size={16} className="text-yellow-500" />}
               >
                 <div className="flex flex-wrap gap-2">
