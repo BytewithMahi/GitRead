@@ -5,8 +5,10 @@ import analyzeRoutes from './routes/analyze.js';
 import githubRoutes from './routes/github.js';
 import generateRoutes from './routes/generate.js';
 import improveRoutes from './routes/improve.js';
+import cors from "cors";
 
 const app = express();
+app.use(cors());
 const PORT = process.env.PORT || 5000;
 
 // Middleware
