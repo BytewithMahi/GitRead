@@ -29,8 +29,7 @@ export const MainScreen = ({
     setError(null);
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      const response = await fetch(`${apiUrl}/api/github`, {
+      const response = await fetch('http://localhost:5000/api/github', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ repoUrl: githubUrl })
@@ -55,8 +54,7 @@ export const MainScreen = ({
     setError(null);
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      const response = await fetch(`${apiUrl}/api/generate`, {
+      const response = await fetch('http://localhost:5000/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ projectName, description: projectDesc, techStack, features })
