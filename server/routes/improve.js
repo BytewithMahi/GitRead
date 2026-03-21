@@ -47,7 +47,7 @@ ${readme}
     res.json({ readme: cleanText });
   } catch (error) {
     console.error('Error improving README:', error);
-    res.status(500).json({ error: 'Failed to improve README.' });
+    res.status(500).json({ error: `Failed to improve README: ${error.message}` });
   }
 });
 

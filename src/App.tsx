@@ -28,7 +28,8 @@ function App() {
     setContent(text);
 
     try {
-      const response = await fetch('http://localhost:5000/api/analyze', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiUrl}/api/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ readme: text }),
@@ -55,16 +56,16 @@ function App() {
 
       <main>
         {view === 'input' ? (
-          <MainScreen 
-            onAnalyze={handleAnalyze} 
-            isAnalyzing={loading} 
+          <MainScreen
+            onAnalyze={handleAnalyze}
+            isAnalyzing={loading}
             apiError={error}
           />
         ) : (
-          <ReviewDashboard 
-            content={content} 
-            analysis={analysisResult} 
-            onBack={() => setView('input')} 
+          <ReviewDashboard
+            content={content}
+            analysis={analysisResult}
+            onBack={() => setView('input')}
           />
         )}
       </main>

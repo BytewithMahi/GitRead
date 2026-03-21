@@ -2,11 +2,11 @@ import { motion } from 'framer-motion';
 import { Terminal, Send, Link, AlertCircle, Loader2, Wand2 } from 'lucide-react';
 import { useState } from 'react';
 
-export const MainScreen = ({ 
-  onAnalyze, 
-  isAnalyzing = false, 
-  apiError = null 
-}: { 
+export const MainScreen = ({
+  onAnalyze,
+  isAnalyzing = false,
+  apiError = null
+}: {
   onAnalyze: (content: string) => void;
   isAnalyzing?: boolean;
   apiError?: string | null;
@@ -29,7 +29,8 @@ export const MainScreen = ({
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:5000/api/github', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiUrl}/api/github`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ repoUrl: githubUrl })
@@ -54,7 +55,8 @@ export const MainScreen = ({
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:5000/api/generate', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiUrl}/api/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ projectName, description: projectDesc, techStack, features })
@@ -83,7 +85,7 @@ export const MainScreen = ({
         className="w-full max-w-3xl glass-card rounded-3xl p-8 md:p-12 relative overflow-hidden"
       >
         <div className="absolute top-0 left-1/4 w-1/2 h-1 bg-gradient-to-r from-transparent via-gravity-cyan to-transparent opacity-50" />
-        
+
         {/* Futuristic SVG Logo */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
@@ -95,11 +97,11 @@ export const MainScreen = ({
           <svg width="100%" height="100%" viewBox="0 0 100 100" className="drop-shadow-[0_0_15px_rgba(6,182,212,0.3)]">
             <path d="M20 35 C35 30, 45 30, 50 35 C55 30, 65 30, 80 35 V75 C65 70, 55 70, 50 75 C45 70, 35 70, 20 75 Z" fill="none" stroke="url(#logoGrad)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M50 35 V75" stroke="url(#logoGrad)" strokeWidth="4" strokeLinecap="round" />
-            
+
             <motion.circle cx="35" cy="50" r="3" fill="#A855F7" animate={{ r: [3, 4, 3] }} transition={{ repeat: Infinity, duration: 2 }} />
             <motion.circle cx="65" cy="58" r="3" fill="#06B6D4" animate={{ r: [3, 4, 3] }} transition={{ repeat: Infinity, duration: 2, delay: 0.5 }} />
             <motion.circle cx="50" cy="45" r="4" fill="#FFFFFF" className="animate-ping" />
-            
+
             <defs>
               <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#9333ea" />
@@ -110,7 +112,7 @@ export const MainScreen = ({
         </motion.div>
 
         <div className="text-center mb-8">
-          <motion.h1 
+          <motion.h1
             className="text-4xl md:text-5xl font-black md:tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gravity-cyan"
           >
             GitRead
@@ -126,11 +128,10 @@ export const MainScreen = ({
             <button
               key={tab}
               onClick={() => setActiveTab(tab as any)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium capitalize transition-all duration-200 ${
-                activeTab === tab 
-                  ? 'bg-gravity-cyan/20 border border-gravity-cyan/40 text-gravity-cyan' 
-                  : 'bg-white/5 border border-white/5 hover:bg-white/10 text-gray-400'
-              }`}
+              className={`px-4 py-2 rounded-xl text-sm font-medium capitalize transition-all duration-200 ${activeTab === tab
+                ? 'bg-gravity-cyan/20 border border-gravity-cyan/40 text-gravity-cyan'
+                : 'bg-white/5 border border-white/5 hover:bg-white/10 text-gray-400'
+                }`}
             >
               {tab === 'paste' ? 'Paste' : tab === 'github' ? 'GitHub' : 'Generate AI'}
             </button>
@@ -214,22 +215,22 @@ export const MainScreen = ({
         <motion.div className="flex justify-center mt-8">
           <button
             onClick={
-              activeTab === 'paste' 
-                ? () => content.trim() && onAnalyze(content) 
-                : activeTab === 'github' 
-                ? handleFetchReadme 
-                : handleGenerateReadme
+              activeTab === 'paste'
+                ? () => content.trim() && onAnalyze(content)
+                : activeTab === 'github'
+                  ? handleFetchReadme
+                  : handleGenerateReadme
             }
             disabled={
               activeTab === 'paste' ? (!content.trim() || isAnalyzing) :
-              activeTab === 'github' ? (!githubUrl.trim() || loading || isAnalyzing) :
-              (!projectName.trim() || !projectDesc.trim() || loading || isAnalyzing)
+                activeTab === 'github' ? (!githubUrl.trim() || loading || isAnalyzing) :
+                  (!projectName.trim() || !projectDesc.trim() || loading || isAnalyzing)
             }
             className="group relative px-8 py-4 rounded-xl font-bold text-white transition-all duration-300 disabled:opacity-40"
           >
             <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-gravity-purple to-gravity-cyan opacity-80 group-hover:opacity-100 blur-[2px]" />
             <div className="absolute inset-x-[1px] inset-y-[1px] rounded-[11px] bg-black/90 group-hover:bg-black/60" />
-            
+
             <div className="relative flex items-center space-x-2">
               <span>{loading || isAnalyzing ? 'PROCESSING...' : activeTab === 'generate' ? 'GENERATE TEMPLATE' : 'ANALYZE'}</span>
               {!(loading || isAnalyzing) && (activeTab === 'generate' ? <Wand2 size={16} /> : <Send size={16} />)}

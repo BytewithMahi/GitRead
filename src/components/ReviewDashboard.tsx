@@ -35,7 +35,8 @@ export const ReviewDashboard = ({ content, analysis, onBack }: ReviewDashboardPr
     setError(null);
 
     try {
-      const response = await fetch('https://gitread-backend.onrender.com/api/improve', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiUrl}/api/improve`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ readme: content })
