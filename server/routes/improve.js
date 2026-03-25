@@ -47,7 +47,11 @@ ${readme}
     res.json({ readme: cleanText });
   } catch (error) {
     console.error('Error improving README:', error);
-    res.status(500).json({ error: `Failed to improve README: ${error.message}` });
+    let message = error.message;
+    if (message.includes('429') || message.includes('quota')) {
+      message = 'Rate limit exceeded or quota full. Please wait a minute before trying again.';
+    }
+    res.status(500).json({ error: `Failed to improve README: ${message}` });
   }
 });
 
