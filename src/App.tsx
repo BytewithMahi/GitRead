@@ -8,6 +8,7 @@ function App() {
   const [view, setView] = useState<'input' | 'dashboard'>('input');
   const [content, setContent] = useState('');
   const [isDark, setIsDark] = useState(true);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [analysisResult, setAnalysisResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -42,8 +43,8 @@ function App() {
       const data = await response.json();
       setAnalysisResult(data);
       setView('dashboard');
-    } catch (err: any) {
-      setError(err.message || 'An error occurred during analysis.');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred during analysis.');
     } finally {
       setLoading(false);
     }

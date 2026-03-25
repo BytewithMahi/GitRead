@@ -48,8 +48,8 @@ export const ReviewDashboard = ({ content, analysis, onBack }: ReviewDashboardPr
       if (data.readme) {
         setImprovedReadme(data.readme);
       }
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setIsImproving(false);
     }
