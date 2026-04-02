@@ -1,6 +1,19 @@
+/* eslint-disable react-hooks/purity */
 import { motion } from 'framer-motion';
+import { useMemo } from 'react';
 
 export const Background = () => {
+  const particles = useMemo(() => {
+    return [...Array(20)].map((_, i) => ({
+      id: i,
+      y: Math.random() * 100 + "%",
+      x: Math.random() * 100 + "%",
+      scale: Math.random() * 0.5 + 0.5,
+      opacity: Math.random() * 0.3 + 0.1,
+      duration: Math.random() * 10 + 15,
+    }));
+  }, []);
+
   return (
     <div className="fixed inset-0 -z-50 overflow-hidden bg-gravity-dark">
       {/* Glow Orbs */}
@@ -35,21 +48,21 @@ export const Background = () => {
       />
       
       {/* Floating Particles */}
-      {[...Array(20)].map((_, i) => (
+      {particles.map((p) => (
         <motion.div
-          key={i}
+          key={p.id}
           initial={{
-            y: Math.random() * 100 + "%",
-            x: Math.random() * 100 + "%",
-            scale: Math.random() * 0.5 + 0.5,
-            opacity: Math.random() * 0.3 + 0.1,
+            y: p.y,
+            x: p.x,
+            scale: p.scale,
+            opacity: p.opacity,
           }}
           animate={{
             y: ["0%", "100%", "0%"],
             x: ["0%", "10%", "-10%", "0%"],
           }}
           transition={{
-            duration: Math.random() * 10 + 15,
+            duration: p.duration,
             repeat: Infinity,
             ease: "linear",
           }}

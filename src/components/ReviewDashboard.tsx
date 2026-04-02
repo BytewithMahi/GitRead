@@ -35,7 +35,8 @@ export const ReviewDashboard = ({ content, analysis, onBack }: ReviewDashboardPr
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:5000/api/improve', {
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiBase}/api/improve`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ readme: content })
@@ -47,8 +48,8 @@ export const ReviewDashboard = ({ content, analysis, onBack }: ReviewDashboardPr
       if (data.readme) {
         setImprovedReadme(data.readme);
       }
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setIsImproving(false);
     }

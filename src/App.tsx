@@ -8,6 +8,7 @@ function App() {
   const [view, setView] = useState<'input' | 'dashboard'>('input');
   const [content, setContent] = useState('');
   const [isDark, setIsDark] = useState(true);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [analysisResult, setAnalysisResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -28,7 +29,8 @@ function App() {
     setContent(text);
 
     try {
-      const response = await fetch('http://localhost:5000/api/analyze', {
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiBase}/api/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ readme: text }),
@@ -41,8 +43,8 @@ function App() {
       const data = await response.json();
       setAnalysisResult(data);
       setView('dashboard');
-    } catch (err: any) {
-      setError(err.message || 'An error occurred during analysis.');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred during analysis.');
     } finally {
       setLoading(false);
     }

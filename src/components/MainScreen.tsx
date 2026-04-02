@@ -29,7 +29,8 @@ export const MainScreen = ({
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:5000/api/github', {
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiBase}/api/github`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ repoUrl: githubUrl })
@@ -41,8 +42,8 @@ export const MainScreen = ({
       if (data.readme) {
         onAnalyze(data.readme);
       }
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setLoading(false);
     }
@@ -54,7 +55,8 @@ export const MainScreen = ({
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:5000/api/generate', {
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiBase}/api/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ projectName, description: projectDesc, techStack, features })
@@ -67,8 +69,8 @@ export const MainScreen = ({
         setContent(data.readme);
         setActiveTab('paste');
       }
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setLoading(false);
     }
@@ -125,7 +127,7 @@ export const MainScreen = ({
           {['paste', 'github', 'generate'].map((tab) => (
             <button
               key={tab}
-              onClick={() => setActiveTab(tab as any)}
+              onClick={() => setActiveTab(tab as 'paste' | 'github' | 'generate')}
               className={`px-4 py-2 rounded-xl text-sm font-medium capitalize transition-all duration-200 ${activeTab === tab
                 ? 'bg-gravity-cyan/20 border border-gravity-cyan/40 text-gravity-cyan'
                 : 'bg-white/5 border border-white/5 hover:bg-white/10 text-gray-400'
