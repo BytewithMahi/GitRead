@@ -29,13 +29,8 @@ export const MainScreen = ({
     setError(null);
 
     try {
-<<<<<<< HEAD
       const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
       const response = await fetch(`${apiBase}/api/github`, {
-=======
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      const response = await fetch(`${API_URL}/api/github`, {
->>>>>>> cb2cd721da7ce2975de68325d38b7e14b02c1c3e
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ repoUrl: githubUrl })
@@ -60,13 +55,8 @@ export const MainScreen = ({
     setError(null);
 
     try {
-<<<<<<< HEAD
       const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
       const response = await fetch(`${apiBase}/api/generate`, {
-=======
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      const response = await fetch(`${API_URL}/api/generate`, {
->>>>>>> cb2cd721da7ce2975de68325d38b7e14b02c1c3e
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ projectName, description: projectDesc, techStack, features })
