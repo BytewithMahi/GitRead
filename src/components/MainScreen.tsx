@@ -29,7 +29,7 @@ export const MainScreen = ({
     setError(null);
 
     try {
-      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+      const apiBase = 'http://localhost:5000';
       const response = await fetch(`${apiBase}/api/github`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -55,7 +55,7 @@ export const MainScreen = ({
     setError(null);
 
     try {
-      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+      const apiBase = 'http://localhost:5000';
       const response = await fetch(`${apiBase}/api/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

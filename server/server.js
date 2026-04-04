@@ -19,10 +19,6 @@ app.use('/api/github', githubRoutes);
 app.use('/api/generate', generateRoutes);
 app.use('/api/improve', improveRoutes);
 
-// Health Check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'README Reviewer AI Backend is running' });
-});
 
 // Error Handling Middleware for uncaught errors
 app.use((err, req, res, next) => {
