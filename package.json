@@ -7,12 +7,10 @@
     "dev:frontend": "vite",
     "dev:backend": "npm --prefix server run dev",
     "dev": "concurrently -k -n \"frontend,backend\" -c \"cyan,green\" \"npm run dev:frontend\" \"npm run dev:backend\"",
-    "build": "tsc -b && vite build",
+    "build": "npm install --prefix server && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start:frontend": "vite preview",
-    "start:backend": "npm --prefix server start",
-    "start": "concurrently -k -n \"frontend,backend\" -c \"cyan,green\" \"npm run start:frontend\" \"npm run start:backend\""
+    "start": "node server/server.js"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.2.2",
