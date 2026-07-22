@@ -1,0 +1,24 @@
+# GitRead - AI README Reviewer
+
+## Overview
+GitRead is a futuristic, AI-powered platform designed to help developers create, analyze, and enhance their GitHub repository documentation. By leveraging advanced artificial intelligence, GitRead ensures that your project's first impression—the README—is structured, professional, and informative.
+
+## Key Features
+- **AI Analysis**: Paste your existing README.md content to receive intelligent feedback, structure improvements, and quality assessments.
+- **GitHub Integration**: Effortlessly fetch README files directly from any public GitHub repository URL for instant analysis.
+- **AI Generation**: Don't have a README? Provide your project name, description, tech stack, and features, and GitRead will generate a high-quality, professional template tailored to your project.
+- **Futuristic UI**: A sleek, dark-themed interface built with glassmorphism and smooth animations for a premium developer experience.
+
+## Tech Stack
+- **Frontend**: React.js, TypeScript, Vite, Tailwind CSS, Framer Motion, Lucide Icons.
+- **Backend**: Node.js, Express.js.
+- **AI**: Google Generative AI (Gemini) for intelligent content analysis and generation.
+
+## How to Run
+1. **Backend**:
+   - `cd server`
+   - `npm install`
+   - `npm run dev` (Starts on http://localhost:5000)
+2. **Frontend**:
+   - `npm install`
+   - `npm run dev` (Starts on http://localhost:5173 by default)

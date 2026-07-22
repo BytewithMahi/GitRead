@@ -1,0 +1,25 @@
+[
+  {
+    "readme": "# Sample App\nA basic calculator without much documentation.",
+    "analysis": {
+      "score": 4.5,
+      "summary": "The README is very lightweight. It needs installation guidelines and visual assets.",
+      "strengths": [
+        "Has a clear title"
+      ],
+      "weaknesses": [
+        "Lacks setup guide",
+        "Lacks visual demos"
+      ],
+      "missing_sections": [
+        "Installation",
+        "Usage",
+        "License"
+      ],
+      "suggestions": [
+        "Add a Step-by-step setup section",
+        "Include screenshots or GIFs"
+      ]
+    }
+  }
+]

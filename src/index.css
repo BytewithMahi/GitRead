@@ -1,0 +1,152 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: #030307;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(124, 58, 237, 0.1) 0px, transparent 50%);
+  color: #fff;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Glow Effects */
+.glow-cyan {
+  box-shadow: 0 0 50px -10px rgba(6, 182, 212, 0.3);
+}
+
+.glow-purple {
+  box-shadow: 0 0 50px -10px rgba(139, 92, 246, 0.3);
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.glass-card {
+  background: rgba(10, 10, 16, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(6, 182, 212, 0.3);
+}
+
+/* Border Glow Animation gradient */
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.glow-border {
+  position: relative;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: conic-gradient(from var(--border-angle), #b829ff, #06b6d4, #b829ff);
+  border-radius: inherit;
+  z-index: -1;
+  animation: rotate-border 4s linear infinite;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  padding: 1px;
+}
+
+@keyframes rotate-border {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+/* --- Light Mode Overrides --- */
+html.light body {
+  background-color: #f1f5f9;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.08) 0px, transparent 40%),
+    radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.08) 0px, transparent 40%);
+  color: #0f172a;
+}
+
+html.light .glass-panel {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light .glass-card {
+  background: rgba(255, 255, 255, 0.75) !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Text Overrides for Light Mode inside Cards */
+html.light h1, html.light h2, html.light h3, html.light span, html.light p, html.light textarea {
+  color: #1e293b !important; /* slate-800 */
+}
+
+html.light .text-gray-400, html.light .text-gray-500 {
+  color: #64748b !important; /* slate-500 */
+}
+
+html.light .text-gray-300 {
+  color: #334155 !important; /* slate-700 */
+}
+
+html.light .bg-clip-text {
+  background-image: linear-gradient(to right, #0f172a, #334155) !important;
+}
+
+html.light textarea {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Fix Background Component to respect Light Mode */
+html.light .bg-gravity-dark {
+  background-color: #f1f5f9 !important;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.08) 0px, transparent 40%),
+    radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.08) 0px, transparent 40%) !important;
+}
+
+html.light .absolute.bg-gravity-purple\/20 {
+  background-color: rgba(139, 92, 246, 0.08) !important;
+}
+
+html.light .absolute.bg-gravity-cyan\/15 {
+  background-color: rgba(6, 182, 212, 0.08) !important;
+}
+
+
